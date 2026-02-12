@@ -3,10 +3,7 @@ const router = Router();
 import { passportCall } from "../middlewares/passport/passport-call.js";
 
 import user from "./user.js";
-import mocks from "./mocks.js"
 import auth from "./auth.js";
-
-router.use("/mocks", mocks)
 
 router.use("/auth", auth);
 

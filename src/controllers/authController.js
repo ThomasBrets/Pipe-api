@@ -1,4 +1,5 @@
 import { authService } from "../services/authService.js";
+import { UserDto } from "../dtos/user.dto.js";
 
 class AuthController {
   constructor(services) {
@@ -8,7 +9,9 @@ class AuthController {
   register = async (req, res, next) => {
     try {
       const resp = await this.services.register(req.body);
-      res.status(201).json(resp);
+      // Usar DTO para filtrar datos sensibles (password, resetToken, etc.)
+      const userDto = new UserDto(resp);
+      res.status(201).json(userDto);
     } catch (error) {
       next(error);
     }

@@ -5,7 +5,7 @@ import { createHash, isValid } from "../utils/user-utils.js";
 import jwt from "jsonwebtoken";
 
 
-class AuthService {
+export class AuthService {
   constructor(repository) {
     this.repository = repository;
   }

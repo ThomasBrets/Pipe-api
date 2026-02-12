@@ -11,3 +11,7 @@ logs
 
 # Build (si en algún momento generás)
 dist/
+
+# Testing
+coverage/
+.jest-cache/

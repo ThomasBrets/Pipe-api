@@ -22,4 +22,4 @@ class AuthRepository {
   };
 }
 
-export const authRepository = new AuthRepository(userDao);
+export const authRepository = new AuthRepository(userDao); 

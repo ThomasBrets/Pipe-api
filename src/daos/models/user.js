@@ -13,6 +13,11 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    // Validación de formato de email con regex
+    match: [
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      "Por favor ingrese un email válido",
+    ],
   },
   age: {
     type: Number,

@@ -2,7 +2,7 @@ import express, { Router } from "express";
 const router = Router();
 
 import cart from "./cart.js";
-import UserDto from "../dtos/userDto.js";
+import { UserDto } from "../dtos/user.dto.js"; // Actualizado al nuevo DTO
 import product from "./product.js";
 import { authRepository } from "../repositories/authRepository.js";
 

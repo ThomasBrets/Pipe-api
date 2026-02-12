@@ -23,7 +23,8 @@ export default class MongoDao {
     try {
       return await this.model.create(body);
     } catch (error) {
-      throw new Error(error);
+      // NO envolver el error - preservar el ValidationError de Mongoose
+      throw error; // ✅ Preserva name, errors, code, etc.
     }
   };
 
