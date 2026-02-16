@@ -10,6 +10,8 @@ import passport from "passport";
 import "./middlewares/passport/passport-jwt-cookies.js";
 import cors from "cors";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger.js";
 
 
 // Middlewares
@@ -22,10 +24,20 @@ app.use(passport.initialize());
 // Configuración de CORS
 app.use(
   cors({
-    origin: "https://pipe-front.vercel.app", 
+    origin: "https://pipe-front.vercel.app",
     credentials: true,
   })
 );
+
+// Documentación de la API con Swagger
+// Disponible en http://localhost:3000/api-docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Ruta para obtener el spec OpenAPI en formato JSON
+app.get("/api-docs.json", (_req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
 
 // Rutas principales
 app.use("/api", routes);
