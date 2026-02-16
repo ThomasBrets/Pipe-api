@@ -16,6 +16,11 @@ export class AuthService {
       const existUser = await this.repository.getUserByEmail(email);
       if (existUser) throw new CustomError("Usuario ya existe", 400);
 
+      // Validar longitud mínima de contraseña
+      if (!password || password.length < 6) {
+        throw new CustomError("La contraseña debe tener al menos 6 caracteres", 400);
+      }
+
       //Creo el carrito
       const cart = await cartRepository.createCart()
 
