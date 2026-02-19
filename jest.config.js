@@ -44,6 +44,10 @@ export default {
   // Verbose muestra cada test individual
   verbose: true,
 
+  // Ejecutar suites secuencialmente para evitar conflictos en la DB de test
+  // Sin esto, los beforeEach de distintos suites se pisan al compartir la misma DB
+  maxWorkers: 1,
+
   // Ignorar node_modules y otros directorios
   testPathIgnorePatterns: [
     "/node_modules/",

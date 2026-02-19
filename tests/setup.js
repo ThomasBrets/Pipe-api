@@ -8,7 +8,8 @@
 import dotenv from "dotenv";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { jest, afterEach } from "@jest/globals";
+import { jest, afterEach, afterAll } from "@jest/globals";
+import mongoose from "mongoose";
 
 // ============================================================================
 // CONFIGURACIÓN DE ENTORNO
@@ -42,4 +43,13 @@ jest.setTimeout(10000);
 // Limpiar mocks después de cada test
 afterEach(() => {
   jest.clearAllMocks();
+});
+
+// Cerrar conexión a MongoDB al finalizar TODOS los suites
+// Con runInBand los suites corren en el mismo proceso, por eso el cierre
+// debe hacerse una sola vez al final y no en cada suite individualmente
+afterAll(async () => {
+  if (mongoose.connection.readyState === 1) {
+    await mongoose.connection.close();
+  }
 });

@@ -21,8 +21,7 @@ router.get("/current", async (req, res) => {
   }
 });
 
-//!Products
-router.use("/products", product);
+
 
 //! Cart
 router.use("/carts", cart);

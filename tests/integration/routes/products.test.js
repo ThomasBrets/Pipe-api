@@ -39,7 +39,6 @@ describe("Products Endpoints - Integration Tests", () => {
       await ProductModel.deleteMany({});
       await UserModel.deleteMany({});
       await CartModel.deleteMany({});
-      await mongoose.connection.close();
     } catch (error) {
       // Ignorar errores al limpiar
     }
@@ -215,6 +214,7 @@ describe("Products Endpoints - Integration Tests", () => {
         .get("/api/products/id-invalido");
 
       // Mongoose lanza CastError con IDs inválidos, puede ser 400 o 500
+      // Verifica que el status code sea 400 o mayor.
       expect(response.status).toBeGreaterThanOrEqual(400);
     });
   });

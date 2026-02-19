@@ -47,7 +47,6 @@ describe("Auth Endpoints - Integration Tests", () => {
     try {
       await UserModel.deleteMany({});
       await CartModel.deleteMany({});
-      await mongoose.connection.close(); // Importante: cerrar conexión para que Jest termine
     } catch (error) {
       // Ignorar errores al limpiar
     }
