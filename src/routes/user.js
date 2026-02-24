@@ -77,6 +77,9 @@ router.get("/current", async (req, res) => {
 
 
 
+//! Products (alias para que el context del frontend funcione via /users/products)
+router.use("/products", product);
+
 //! Cart
 router.use("/carts", cart);
 
