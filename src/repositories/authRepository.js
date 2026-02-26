@@ -36,6 +36,15 @@ class AuthRepository {
       throw error;
     }
   };
+
+  // Actualiza campos permitidos del usuario por ID
+  updateById = async (id, data) => {
+    try {
+      return await this.dao.update(id, data);
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 export const authRepository = new AuthRepository(userDao); 

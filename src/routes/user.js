@@ -75,6 +75,36 @@ router.get("/current", async (req, res) => {
   }
 });
 
+// Actualizar datos del usuario autenticado.
+// Solo se permiten first_name, last_name y age — nunca email, role ni password.
+router.put("/current", async (req, res) => {
+  try {
+    const user = await authRepository.getUserByEmail(req.user.email);
+    if (!user)
+      return res.status(404).json({ message: "usuario no encontrado" });
+
+    const { first_name, last_name, age } = req.body;
+
+    // Validaciones básicas
+    if (!first_name?.trim() || !last_name?.trim())
+      return res.status(400).json({ error: "Nombre y apellido son requeridos" });
+
+    if (age !== undefined && (isNaN(age) || Number(age) < 18))
+      return res.status(400).json({ error: "La edad debe ser mayor o igual a 18" });
+
+    const updated = await authRepository.updateById(user._id, {
+      first_name: first_name.trim(),
+      last_name: last_name.trim(),
+      ...(age !== undefined && { age: Number(age) }),
+    });
+
+    // Devolver el usuario actualizado sin datos sensibles
+    res.json(new UserDto(updated));
+  } catch (error) {
+    res.status(500).json({ message: "error al actualizar el usuario", error });
+  }
+});
+
 
 
 //! Products (alias para que el context del frontend funcione via /users/products)
