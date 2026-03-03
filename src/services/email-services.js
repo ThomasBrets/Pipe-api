@@ -1,24 +1,22 @@
 // services/emailService.js
-import { transporter, emailPurchaseConfig } from "../config/nodemailer.js";
+import { resend, emailPurchaseConfig } from "../config/nodemailer.js";
 
 export const sendPurchaseEmailService = async (user, items, total) => {
-  console.log("📧 EMAIL_USER:", process.env.EMAIL_USER);
-  console.log("📧 EMAIL_PASS existe:", !!process.env.EMAIL_PASS, "length:", process.env.EMAIL_PASS?.length);
+  console.log("📧 RESEND_API_KEY existe:", !!process.env.RESEND_API_KEY);
   console.log("📧 Destinatario:", user.email);
 
   try {
     const mailOptions = emailPurchaseConfig(user, items, total);
     console.log("📧 mailOptions.from:", mailOptions.from);
     console.log("📧 mailOptions.to:", mailOptions.to);
-    const info = await transporter.sendMail(mailOptions);
-    console.log("✅ Email enviado - messageId:", info.messageId, "response:", info.response);
-    return info;
+    const { data, error } = await resend.emails.send(mailOptions);
+    if (error) {
+      throw error;
+    }
+    console.log("✅ Email enviado - id:", data.id);
+    return data;
   } catch (error) {
-    console.error("❌ Email error code:", error.code);
-    console.error("❌ Email error command:", error.command);
-    console.error("❌ Email error message:", error.message);
+    console.error("❌ Email error:", error.message || error);
     throw new Error("Error al enviar correo de compra");
   }
 };
-
-

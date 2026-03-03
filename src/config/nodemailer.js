@@ -1,18 +1,9 @@
-// config/nodemailer-config.js
-import { createTransport } from "nodemailer";
+// config/resend-config.js
+import { Resend } from "resend";
 
-export const transporter = createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+export const resend = new Resend(process.env.RESEND_API_KEY);
 
-transporter
-  .verify()
-  .then(() => console.log("✅ Mailer conectado"))
-  .catch((err) => console.error("❌ Error con mailer:", err));
+console.log("✅ Resend configurado, API key existe:", !!process.env.RESEND_API_KEY);
 
 export const emailPurchaseConfig = (user, items, total) => {
   const rows = items
@@ -40,7 +31,7 @@ export const emailPurchaseConfig = (user, items, total) => {
   `;
 
   return {
-    from: process.env.EMAIL_USER,
+    from: "onboarding@resend.dev",
     to: user.email,
     subject: "Tu compra - Confirmación",
     html,
