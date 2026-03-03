@@ -85,16 +85,19 @@ class CartService {
       return { title: item.product.title, price, quantity: qty, subtotal };
     });
 
-    // 🧾 Enviar email con resumen
-    await sendPurchaseEmailService(user, items, total);
-
-    // 🧹 Vaciar carrito después de la compra
+    // 🧹 Vaciar carrito después de la compra (ANTES del email para no bloquear)
     cart.products = [];
     await this.repository.saveCart(cart);
 
+    // 🧾 Enviar email con resumen (no-bloqueante: si falla, la compra ya se completó)
+    try {
+      await sendPurchaseEmailService(user, items, total);
+    } catch (emailError) {
+      console.error("⚠️ Email de compra falló, pero la compra se completó:", emailError.message);
+    }
+
     return {
-      message:
-        "Compra realizada con éxito. Se envió un correo de confirmación.",
+      message: "Compra realizada con éxito.",
       total,
     };
   };
