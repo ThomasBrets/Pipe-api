@@ -9,7 +9,7 @@
 REST API para una aplicación de e-commerce, construida con Node.js y Express. Implementa autenticación JWT mediante cookies HTTP-only, arquitectura en capas estricta y documentación interactiva con Swagger.
 
 **Frontend en producción:** [pipe-front.vercel.app](https://pipe-front.vercel.app)
-**Documentación API:** `[http://localhost:3000/api-docs](https://pipe-api.onrender.com/api-docs)`
+**Documentación API:** `https://pipe-api.onrender.com/api-docs`
 
 ---
 
