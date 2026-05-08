@@ -9,7 +9,7 @@
 REST API para una aplicación de e-commerce, construida con Node.js y Express. Implementa autenticación JWT mediante cookies HTTP-only, arquitectura en capas estricta y documentación interactiva con Swagger.
 
 **Frontend en producción:** [pipe-front.vercel.app](https://pipe-front.vercel.app)
-**Documentación API:** `http://localhost:3000/api-docs`
+**Documentación API:** `https://pipe-api.onrender.com/api-docs`
 
 ---
 
@@ -271,7 +271,9 @@ La API está configurada para correr en producción con las siguientes considera
 
 ## Autor
 
-**Thomas Brets**
-Backend Developer — CoderHouse Backend Avanzado
+**Thomas Bretschneider**  
+Full Stack Developer · Mar del Plata, Argentina
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-thomas--bretschneider-0077B5?logo=linkedin)](https://linkedin.com/in/thomas-bretschneider)
 [![GitHub](https://img.shields.io/badge/GitHub-ThomasBrets-181717?logo=github)](https://github.com/ThomasBrets)
+[![Portfolio](https://img.shields.io/badge/Portfolio-ver%20sitio-00C7B7?logo=vercel)](https://portfolio-nu-olive-0800kwb556.vercel.app)
