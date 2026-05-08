@@ -19,7 +19,6 @@ class UserDao extends MongoDao {
         return await this.model.findById(id)
     } catch (error) {
         throw new Error(error);
-        
     }
   }
 }

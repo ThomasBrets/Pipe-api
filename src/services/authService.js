@@ -26,7 +26,7 @@ export class AuthService {
 
       const resp = await this.repository.create({
         ...body,
-        password: createHash(password),
+        password: await createHash(password),
         cart: cart._id,
       });
       if (!resp) throw new CustomError("Error al registrar usario", 400);
@@ -42,7 +42,7 @@ export class AuthService {
       const existUser = await this.repository.getUserByEmail(email);
       if (!existUser) throw new CustomError("Credenciales incorrectas", 401);
 
-      const isValidPass = isValid(password, existUser.password);
+      const isValidPass = await isValid(password, existUser.password);
       if (!isValidPass) throw new CustomError("Credenciales incorrectas", 401);
 
       return existUser;

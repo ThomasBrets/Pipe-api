@@ -1,9 +1,9 @@
-import { genSaltSync, hashSync, compareSync } from "bcrypt";
+import { hash, compare } from "bcrypt";
 
-export const createHash = (password) => {
-  return hashSync(password, genSaltSync(10));
+export const createHash = async (password) => {
+  return await hash(password, 10);
 };
 
-export const isValid = (passwordPlain, passwordHash) => {
-  return compareSync(passwordPlain, passwordHash);
+export const isValid = async (passwordPlain, passwordHash) => {
+  return await compare(passwordPlain, passwordHash);
 };

@@ -32,7 +32,6 @@ const UserSchema = new Schema({
     ref: "Cart",
   },
   role: { type: String, enum: ["user", "admin"], default: "user" },
-
   //?Campos para recuperar contraseña
   resetToken: { type: String, default: null },
   resetTokenExp: { type: Number, default: null },
